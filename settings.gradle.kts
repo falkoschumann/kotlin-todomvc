@@ -1,2 +1,2 @@
 rootProject.name = "todomvc"
-include("contract", "body", "head", "app")
+include("body", "head", "app")

@@ -1,7 +1,8 @@
 plugins {
     kotlin("jvm")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 dependencies {
-    api(project(":contract"))
+    api(project(":body"))
 }
