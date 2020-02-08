@@ -5,12 +5,11 @@
 
 package de.muspellheim.todomvc.domain
 
-import java.lang.IllegalArgumentException
-
-class TodoList(private var todos: List<Todo>) {
+class TodoList(private var todos: List<Todo> = listOf()) {
 
     var filter = Filter.All
-    val activeCount = todos.filter { it.isCompleted.not() }.size
+    val activeCount: Int
+        get() = todos.filter { it.isCompleted.not() }.size
 
     fun allItems(): List<Todo> {
         return todos
@@ -38,16 +37,16 @@ class TodoList(private var todos: List<Todo>) {
             throw IllegalArgumentException("text must not be empty")
         }
         val newTodo = todo.copy(text = t)
-        todos = todos.map { if (it.id == todo.id) newTodo else it }
+        todos = todos.map { if (it === todo) newTodo else it }
+    }
+
+    fun removeTodo(todo: Todo) {
+        todos = todos.filter { it !== todo }
     }
 
     fun toggleCompleted(todo: Todo) {
         val newTodo = todo.copy(isCompleted = !todo.isCompleted)
-        todos = todos.map { if (it.id == todo.id) newTodo else it }
-    }
-
-    fun removeTodo(todo: Todo) {
-        todos = todos.filter { it.id != todo.id }
+        todos = todos.map { if (it === todo) newTodo else it }
     }
 
     fun toggleAllCompleted(completed: Boolean) {

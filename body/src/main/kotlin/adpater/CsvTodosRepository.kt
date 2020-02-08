@@ -16,23 +16,28 @@ import org.apache.commons.csv.CSVFormat
 
 class CsvTodosRepository(private val file: Path) : Todos {
 
-    private val csvFormat = CSVFormat.RFC4180.withHeader("Id, Text, Is completed")
+    private val csvFormat = CSVFormat.RFC4180.withHeader("Text", "Is completed")
 
     override fun load(): TodoList {
         Files.newBufferedReader(file, StandardCharsets.UTF_8).use { reader ->
-            val parser = csvFormat.parse(reader)
+            val parser = csvFormat.withFirstRecordAsHeader().parse(reader)
             val list = parser
-                .map { Todo(it["Text"], it["Is completed"]!!.toBoolean(), it["Id"]) }
+                .map { Todo(it["Text"], it["Is completed"]!!.toBoolean()) }
                 .toList()
             return TodoList(list)
         }
     }
 
     override fun store(todoList: TodoList) {
-        Files.newBufferedWriter(file, StandardCharsets.UTF_8, StandardOpenOption.CREATE).use { writer ->
+        Files.newBufferedWriter(
+            file,
+            StandardCharsets.UTF_8,
+            StandardOpenOption.CREATE,
+            StandardOpenOption.TRUNCATE_EXISTING
+        ).use { writer ->
             csvFormat.print(writer).use { printer ->
                 todoList.allItems().forEach {
-                    printer.printRecord(it.id, it.text, it.isCompleted)
+                    printer.printRecord(it.text, it.isCompleted)
                 }
             }
         }
