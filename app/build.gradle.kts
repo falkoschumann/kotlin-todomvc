@@ -1,3 +1,8 @@
+/*
+ * TodoMVC
+ * Copyright (c) 2020 Falko Schumann
+ */
+
 plugins {
     application
     kotlin("jvm")

@@ -1,3 +1,8 @@
+/*
+ * TodoMVC
+ * Copyright (c) 2020 Falko Schumann
+ */
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {

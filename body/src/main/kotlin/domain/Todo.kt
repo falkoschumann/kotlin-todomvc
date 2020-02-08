@@ -1,3 +1,8 @@
+/*
+ * TodoMVC
+ * Copyright (c) 2020 Falko Schumann
+ */
+
 package de.muspellheim.todomvc.domain
 
 import java.util.UUID
