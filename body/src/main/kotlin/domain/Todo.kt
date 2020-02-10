@@ -14,7 +14,15 @@ class Todo(
     val id: String,
     var text: String,
     var isCompleted: Boolean
-)
+) {
+    var isActive: Boolean
+        get() = !isCompleted
+        set(value) {
+            isCompleted = !value
+        }
+
+    override fun toString() = "$text ($id)"
+}
 
 /**
  * Factory for to-do.

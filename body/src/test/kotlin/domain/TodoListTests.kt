@@ -6,122 +6,57 @@
 package de.muspellheim.todomvc.domain
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.assertAll
 
 class TodoListTests {
 
-    @Test
-    fun `active todo items`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar", true)
-        val todoList = TodoList(listOf(foo, bar))
+    private lateinit var fooTask: Todo
+    private lateinit var barTask: Todo
 
-        todoList.filter = TodoList.Filter.Active
+    private lateinit var todos: TestingTodos
+    private lateinit var todoList: TodoList
 
-        assertEquals(listOf(Todo("Foo")), todoList.filteredItems(), "filtered items")
+    @BeforeEach
+    fun setUp() {
+        fooTask = Todo("f", "Foo", false)
+        barTask = Todo("b", "Bar", true)
+
+        todos = TestingTodos()
+        todos.all = listOf(fooTask, barTask)
+        todos.active = listOf(fooTask)
+        todos.completed = listOf(barTask)
+        todoList = TodoList(todos)
     }
 
     @Test
-    fun `completed todo items`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar", true)
-        val todoList = TodoList(listOf(foo, bar))
+    fun `set all completed`() {
+        todoList.setAllCompleted()
 
-        todoList.filter = TodoList.Filter.Completed
-
-        assertEquals(listOf(Todo("Bar", true)), todoList.filteredItems(), "filtered items")
+        assertAll(
+            { assertEquals(listOf(fooTask), todos.updated, "updated todos") },
+            { assertTrue(fooTask.isCompleted, "foo is completed") },
+            { assertTrue(barTask.isCompleted, "bar is completed") }
+        )
     }
 
     @Test
-    fun `todo added`() {
-        val foo = Todo("Foo")
-        val todoList = TodoList(listOf(foo))
+    fun `set all active`() {
+        todoList.setAllActive()
 
-        todoList.addTodo("Bar")
-
-        assertEquals(listOf(Todo("Foo"), Todo("Bar")), todoList.allItems(), "all items")
-        assertEquals(listOf(Todo("Foo"), Todo("Bar")), todoList.filteredItems(), "filtered items")
-        assertEquals(2, todoList.activeCount, "active count")
-    }
-
-    @Test
-    fun `new todo text must not be empty`() {
-        val todoList = TodoList()
-
-        assertThrows<IllegalArgumentException>("text must not be empty") { todoList.addTodo("") }
-    }
-
-    @Test
-    fun `todo changed`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar")
-        val todoList = TodoList(listOf(foo, bar))
-
-        todoList.changeTodo(foo, "Test")
-
-        assertEquals(listOf(Todo("Test"), Todo("Bar")), todoList.allItems(), "all items")
-        assertEquals(listOf(Todo("Test"), Todo("Bar")), todoList.filteredItems(), "filtered items")
-        assertEquals(2, todoList.activeCount, "active count")
-    }
-
-    @Test
-    fun `changed todo text must not be empty`() {
-        val foo = Todo("Foo")
-        val todoList = TodoList(listOf(foo))
-
-        assertThrows<IllegalArgumentException>("text must not be empty") { todoList.changeTodo(foo, "") }
-    }
-
-    @Test
-    fun `todo removed`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar")
-        val todoList = TodoList(listOf(foo, bar))
-
-        todoList.removeTodo(foo)
-
-        assertEquals(listOf(Todo("Bar")), todoList.allItems(), "all items")
-        assertEquals(listOf(Todo("Bar")), todoList.filteredItems(), "filtered items")
-        assertEquals(1, todoList.activeCount, "active count")
-    }
-
-    @Test
-    fun `completed toggled`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar", true)
-        val todoList = TodoList(listOf(foo, bar))
-
-        todoList.toggleCompleted(foo)
-
-        assertEquals(listOf(Todo("Foo", true), Todo("Bar", true)), todoList.allItems(), "all items")
-        assertEquals(listOf(Todo("Foo", true), Todo("Bar", true)), todoList.filteredItems(), "filtered items")
-        assertEquals(0, todoList.activeCount, "active count")
-    }
-
-    @Test
-    fun `all completed toggled`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar", true)
-        val todoList = TodoList(listOf(foo, bar))
-
-        todoList.toggleAllCompleted(true)
-
-        assertEquals(listOf(Todo("Foo", true), Todo("Bar", true)), todoList.allItems(), "all items")
-        assertEquals(listOf(Todo("Foo", true), Todo("Bar", true)), todoList.filteredItems(), "filtered items")
-        assertEquals(0, todoList.activeCount, "active count")
+        assertAll(
+            { assertEquals(listOf(barTask), todos.updated, "updated todos") },
+            { assertTrue(fooTask.isActive, "foo is active") },
+            { assertTrue(barTask.isActive, "bar is active") }
+        )
     }
 
     @Test
     fun `completed cleared`() {
-        val foo = Todo("Foo")
-        val bar = Todo("Bar", true)
-        val todoList = TodoList(listOf(foo, bar))
-
         todoList.clearCompleted()
 
-        assertEquals(listOf(Todo("Foo")), todoList.allItems(), "all items")
-        assertEquals(listOf(Todo("Foo")), todoList.filteredItems(), "filtered items")
-        assertEquals(1, todoList.activeCount, "active count")
+        assertEquals(listOf(barTask), todos.removed, "removed todos")
     }
 }

@@ -5,7 +5,6 @@
 
 package de.muspellheim.todomvc.portal
 
-import javafx.scene.control.*
-import javafx.scene.layout.*
+import javafx.scene.layout.Pane
 
 class TodoListView : Pane()
