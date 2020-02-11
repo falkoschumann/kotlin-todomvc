@@ -10,4 +10,5 @@ plugins {
 
 dependencies {
     api(project(":body"))
+    implementation("de.jensd:fontawesomefx:8.9")
 }

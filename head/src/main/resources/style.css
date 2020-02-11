@@ -3,32 +3,47 @@
  * Copyright (c) 2020 Falko Schumann
  */
 
-.strikethrough {
+.strikethrough text {
+    -fx-strikethrough: true;
 }
 
 .itemRoot {
+    -fx-padding: 8px;
+    -fx-alignment: center-left;
+}
+
+.itemRoot button {
+    -fx-background-color: transparent;
+    -fx-padding: -2px;
 }
 
 .closeIcon {
+    -fx-fill: #cc9a9a;
+}
+
+.closeIcon:hover {
+    -fx-fill: #af5b5e;
 }
 
 #contentLabel {
+    -fx-font-size: 1.2em;
 }
 
 #title {
-    -fx-font-size: 300%;
+    -fx-font-size: 3em;
     -fx-text-fill: rgba(175, 47, 47, 0.5);
 }
 
 .addItemRoot {
-    -fx-padding: 100%;
+    -fx-padding: 1em;
 }
 
 .addItemRoot text-field {
-    -fx-pref-width: 200;
+    -fx-pref-width: 200px;
 }
 
 .mainCheckBox {
+    -fx-padding: 0.1em;
 }
 
 .header {
@@ -40,4 +55,11 @@
 }
 
 .footer {
+    -fx-padding: 10px;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+.footer * {
+    -fx-spacing: 10px;
 }

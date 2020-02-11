@@ -40,9 +40,10 @@ class CsvTodosRepository(private val file: Path) : Todos {
     }
 
     override fun add(todo: Todo) {
-        Files.newBufferedWriter(file, StandardCharsets.UTF_8, StandardOpenOption.CREATE).use { writer ->
-            csvFormat.print(writer).use { printer -> printTodo(printer, todo) }
-        }
+        Files.newBufferedWriter(file, StandardCharsets.UTF_8, StandardOpenOption.CREATE)
+            .use { writer ->
+                csvFormat.print(writer).use { printer -> printTodo(printer, todo) }
+            }
     }
 
     override fun update(todo: Todo) {

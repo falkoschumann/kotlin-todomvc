@@ -13,5 +13,9 @@ class TodoListView : ListView<Todo>() {
     init {
         isEditable = true
         cellFactory = Callback { TodoListCell() }
+        items.addAll(
+            Todo("1", "Taste JavaScript", true),
+            Todo("2", "Buy a unicorn", false)
+        )
     }
 }

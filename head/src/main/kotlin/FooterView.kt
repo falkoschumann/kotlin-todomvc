@@ -21,7 +21,11 @@ class FooterView : HBox(
         )
     ),
     Button("Clear completed")
-)
+) {
+    init {
+        styleClass += "footer"
+    }
+}
 
 fun toggleGroup(vararg buttons: ToggleButton): Array<out ToggleButton> {
     val g = ToggleGroup()

@@ -16,7 +16,9 @@ class HeaderView : VBox(
         id = "title"
     },
     HBox(
-        CheckBox(),
+        CheckBox().apply {
+            styleClass += "mainCheckBox"
+        },
         TextField().apply {
             promptText = "What needs to be done?"
         }
