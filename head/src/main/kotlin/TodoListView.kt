@@ -5,6 +5,13 @@
 
 package de.muspellheim.todomvc.portal
 
-import javafx.scene.layout.Pane
+import de.muspellheim.todomvc.domain.Todo
+import javafx.scene.control.ListView
+import javafx.util.Callback
 
-class TodoListView : Pane()
+class TodoListView : ListView<Todo>() {
+    init {
+        isEditable = true
+        cellFactory = Callback { TodoListCell() }
+    }
+}

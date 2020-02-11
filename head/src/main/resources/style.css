@@ -1,0 +1,43 @@
+/*
+ * TodoMVC
+ * Copyright (c) 2020 Falko Schumann
+ */
+
+.strikethrough {
+}
+
+.itemRoot {
+}
+
+.closeIcon {
+}
+
+#contentLabel {
+}
+
+#title {
+    -fx-font-size: 300%;
+    -fx-text-fill: rgba(175, 47, 47, 0.5);
+}
+
+.addItemRoot {
+    -fx-padding: 100%;
+}
+
+.addItemRoot text-field {
+    -fx-pref-width: 200;
+}
+
+.mainCheckBox {
+}
+
+.header {
+    -fx-alignment: center;
+}
+
+.header * {
+    -fx-alignment: center-left;
+}
+
+.footer {
+}

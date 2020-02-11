@@ -12,11 +12,19 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 
 class HeaderView : VBox(
-    Label("todos"),
+    Label("todos").apply {
+        id = "title"
+    },
     HBox(
         CheckBox(),
         TextField().apply {
             promptText = "What needs to be done?"
         }
-    )
-)
+    ).apply {
+        styleClass += "addItemRoot"
+    }
+) {
+    init {
+        styleClass += "header"
+    }
+}

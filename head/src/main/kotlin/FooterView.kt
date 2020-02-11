@@ -5,6 +5,7 @@
 
 package de.muspellheim.todomvc.portal
 
+import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.ToggleButton
 import javafx.scene.control.ToggleGroup
@@ -18,7 +19,8 @@ class FooterView : HBox(
             ToggleButton("Active"),
             ToggleButton("Completed")
         )
-    )
+    ),
+    Button("Clear completed")
 )
 
 fun toggleGroup(vararg buttons: ToggleButton): Array<out ToggleButton> {
