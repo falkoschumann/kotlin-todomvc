@@ -3,4 +3,10 @@ build/
 .gradle/
 
 # IDEA
-.idea
+out/
+.idea/
+
+# Eclipse
+.settings/
+.project
+.classpath
