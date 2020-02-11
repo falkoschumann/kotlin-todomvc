@@ -15,7 +15,9 @@ class FooterView : HBox(
     Label("0 item left"),
     HBox(
         *toggleGroup(
-            ToggleButton("All"),
+            ToggleButton("All").apply {
+                isSelected = true
+            },
             ToggleButton("Active"),
             ToggleButton("Completed")
         )

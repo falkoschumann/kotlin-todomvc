@@ -8,6 +8,7 @@ package de.muspellheim.todomvc.portal
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import de.muspellheim.todomvc.domain.Todo
+import java.util.concurrent.Callable
 import javafx.application.Platform
 import javafx.beans.InvalidationListener
 import javafx.beans.binding.Bindings
@@ -21,7 +22,6 @@ import javafx.scene.control.ListCell
 import javafx.scene.control.TextField
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Priority
-import java.util.concurrent.Callable
 
 class TodoListCell : ListCell<Todo>() {
 
@@ -57,7 +57,7 @@ class TodoListCell : ListCell<Todo>() {
                         styleClass.add("closeIcon")
                     }
                     // TODO parent existiert noch nicht im Konstruktor
-                    //removeWhen { parent.hoverProperty().not().or(editingProperty()) }
+                    // removeWhen { parent.hoverProperty().not().or(editingProperty()) }
                 }
             ).apply {
                 styleClass += "itemRoot"
