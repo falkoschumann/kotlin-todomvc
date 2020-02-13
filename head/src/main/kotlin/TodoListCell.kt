@@ -37,6 +37,8 @@ class TodoListCell : ListCell<Todo>() {
     }
 
     private fun createRoot(item: Todo): Node {
+        // TODO Als neue Klasse TodoListView extends HBox
+        // TODO Ohne Hilfsfunktionen
         return HBox(
             CheckBox().apply {
                 isSelected = item.isCompleted
