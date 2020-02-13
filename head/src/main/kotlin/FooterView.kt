@@ -11,26 +11,24 @@ import javafx.scene.control.ToggleButton
 import javafx.scene.control.ToggleGroup
 import javafx.scene.layout.HBox
 
-class FooterView : HBox(
-    Label("0 item left"),
-    HBox(
-        *toggleGroup(
-            ToggleButton("All").apply {
-                isSelected = true
-            },
-            ToggleButton("Active"),
-            ToggleButton("Completed")
-        )
-    ),
-    Button("Clear completed")
-) {
+class FooterView : HBox() {
     init {
         styleClass += "footer"
-    }
-}
 
-fun toggleGroup(vararg buttons: ToggleButton): Array<out ToggleButton> {
-    val g = ToggleGroup()
-    buttons.forEach { it.toggleGroup = g }
-    return buttons
+        val filterGroup = ToggleGroup()
+        children.addAll(
+            Label("0 item left"),
+            HBox(
+                ToggleButton("All").apply {
+                    toggleGroup = filterGroup
+                    isSelected = true
+                }, ToggleButton("Active").apply {
+                    toggleGroup = filterGroup
+                }, ToggleButton("Completed").apply {
+                    toggleGroup = filterGroup
+                }
+            ),
+            Button("Clear completed")
+        )
+    }
 }
