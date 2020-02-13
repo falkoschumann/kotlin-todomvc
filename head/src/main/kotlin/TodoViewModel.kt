@@ -22,7 +22,7 @@ class TodoListViewModel {
     val itemsLeftProperty: IntegerProperty = SimpleIntegerProperty()
     val filterProperty: ObjectProperty<Filter> = SimpleObjectProperty()
 
-    fun add(todo: String) {
+    fun addTodo(todo: String) {
         TODO()
     }
 
