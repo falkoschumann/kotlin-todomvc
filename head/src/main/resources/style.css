@@ -3,7 +3,7 @@
  * Copyright (c) 2020 Falko Schumann
  */
 
-.strikethrough text {
+.strikethrough .text {
     -fx-strikethrough: true;
 }
 
@@ -12,7 +12,7 @@
     -fx-alignment: center-left;
 }
 
-.itemRoot button {
+.itemRoot .button {
     -fx-background-color: transparent;
     -fx-padding: -2px;
 }
@@ -38,7 +38,7 @@
     -fx-padding: 1em;
 }
 
-.addItemRoot text-field {
+.addItemRoot .text-field {
     -fx-pref-width: 200px;
 }
 
