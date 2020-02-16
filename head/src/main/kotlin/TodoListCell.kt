@@ -9,7 +9,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
 import de.muspellheim.todomvc.domain.Todo
 import javafx.application.Platform
-import javafx.beans.InvalidationListener
 import javafx.beans.binding.Bindings
 import javafx.beans.value.ObservableValue
 import javafx.css.Styleable
@@ -32,48 +31,41 @@ class TodoListCell : ListCell<Todo>() {
             text = null
             graphic = null
         } else {
-            graphic = createRoot(item)
-        }
-    }
-
-    private fun createRoot(item: Todo): Node {
-        // TODO Als neue Klasse TodoListView extends HBox
-        // TODO Ohne Hilfsfunktionen
-        return HBox(
-            CheckBox().apply {
-                isSelected = item.isCompleted
-            },
-            Label().apply {
-                id = "contentLabel"
-                maxWidth = Double.MAX_VALUE
-                maxHeight = Double.MAX_VALUE
-                text = item.text
-                removeWhen(editingProperty())
-                toggleClass("strikethrough", item.isCompleted)
-            }.also {
-                HBox.setHgrow(it, Priority.ALWAYS)
-            },
-            TextField().apply {
-                text = item.text
-                removeWhen(editingProperty().not())
-                whenVisible { requestFocus() }
-            }.also {
-                HBox.setHgrow(it, Priority.ALWAYS)
-            },
-            Button().apply {
-                graphic = FontAwesomeIconView(FontAwesomeIcon.CLOSE).apply {
-                    glyphSize = 22
-                    styleClass.add("closeIcon")
+            graphic = HBox(
+                CheckBox().apply {
+                    isSelected = item.isCompleted
+                },
+                Label().apply {
+                    id = "contentLabel"
+                    maxWidth = Double.MAX_VALUE
+                    maxHeight = Double.MAX_VALUE
+                    text = item.text
+                    removeWhen { editingProperty() }
+                    toggleClass("strikethrough", item.isCompleted)
+                    HBox.setHgrow(this, Priority.ALWAYS)
+                },
+                TextField().apply {
+                    text = item.text
+                    removeWhen { editingProperty().not() }
+                    whenVisible { requestFocus() }
+                    HBox.setHgrow(this, Priority.ALWAYS)
+                },
+                Button().apply {
+                    graphic = FontAwesomeIconView(FontAwesomeIcon.CLOSE).apply {
+                        glyphSize = 22
+                        styleClass.add("closeIcon")
+                    }
+                    // TODO parent existiert noch nicht im Konstruktor
+                    // removeWhen { parent.hoverProperty().not().or(editingProperty()) }
                 }
-                // TODO parent existiert noch nicht im Konstruktor
-                // removeWhen { parent.hoverProperty().not().or(editingProperty()) }
+            ).apply {
+                styleClass += "itemRoot"
             }
-        ).apply {
-            styleClass += "itemRoot"
         }
     }
 }
 
+fun <T : Node> T.removeWhen(expr: () -> ObservableValue<Boolean>): T = removeWhen(expr())
 fun <T : Node> T.removeWhen(predicate: ObservableValue<Boolean>) = apply {
     val remove = Bindings.createBooleanBinding(Callable { predicate.value.not() })
     visibleProperty().bind(remove)
@@ -81,15 +73,11 @@ fun <T : Node> T.removeWhen(predicate: ObservableValue<Boolean>) = apply {
 }
 
 fun Node.whenVisible(runLater: Boolean = true, op: () -> Unit) {
-    visibleProperty().onChange {
-        if (it) {
+    visibleProperty().addListener { _, _, newValue ->
+        if (newValue) {
             if (runLater) Platform.runLater(op) else op()
         }
     }
-}
-
-fun <T> ObservableValue<T>.onChange(handler: (T) -> Unit) {
-    addListener(InvalidationListener { handler(value) })
 }
 
 fun <T : Styleable> T.toggleClass(className: String, predicate: Boolean) = apply {
