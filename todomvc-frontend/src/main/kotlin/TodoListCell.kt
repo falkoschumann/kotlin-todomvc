@@ -56,7 +56,7 @@ class TodoListCell : ListCell<Todo>() {
                         styleClass.add("closeIcon")
                     }
                     // TODO parent existiert noch nicht im Konstruktor
-                    // removeWhen { parent.hoverProperty().not().or(editingProperty()) }
+                    removeWhen { parent.hoverProperty().not().or(editingProperty()) }
                 }
             ).apply {
                 styleClass += "itemRoot"

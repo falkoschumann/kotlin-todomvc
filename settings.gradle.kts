@@ -4,4 +4,6 @@
  */
 
 rootProject.name = "todomvc"
-include("body", "head", "app")
+include("todomvc")
+include("todomvc-backend")
+include("todomvc-frontend")

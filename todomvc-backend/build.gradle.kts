@@ -9,7 +9,8 @@ plugins {
 }
 
 dependencies {
-    api(kotlin("stdlib-jdk8"))
+    api(project(":todomvc-contract"))
+    implementation(kotlin("stdlib-jdk8"))
     implementation("org.apache.commons:commons-csv:1.8")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
