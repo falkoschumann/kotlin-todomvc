@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ TodoMVC
+  ~ Copyright (c) 2020 Falko Schumann <falko.schumann@muspellheim.de>
+  -->
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import de.muspellheim.todomvc.portal.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.todomvc.frontend.TodoAppViewController" prefHeight="400.0" prefWidth="600.0">
+    <VBox fx:id="header" alignment="CENTER">
+        <Label style="-fx-text-fill: darksalmon;-fx-font-size: 42" text="todos"/>
+        <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <padding>
+                <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
+            </padding>
+            <CheckBox fx:id="toggleAll" onAction="#toggleAll" />
+            <TextField fx:id="newTodo" onAction="#newTodo" promptText="What needs to be done?" HBox.hgrow="ALWAYS"/>
+        </HBox>
+    </VBox>
+    <ListView fx:id="main" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <cellFactory><TodoListCellFactory /></cellFactory>
+    </ListView>
+    <HBox fx:id="footer" alignment="CENTER" spacing="10.0">
+        <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
+        </padding>
+        <Label fx:id="todoCount" text="... items left"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <ToggleButton fx:id="all" onAction="#filterAll" selected="true" text="All">
+            <toggleGroup>
+                <ToggleGroup fx:id="filters"/>
+            </toggleGroup>
+        </ToggleButton>
+        <ToggleButton fx:id="active" onAction="#filterActive" text="Active" toggleGroup="$filters"/>
+        <ToggleButton fx:id="completed" onAction="#filterCompleted" text="Completed" toggleGroup="$filters"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <Button fx:id="clearCompleted" onAction="#clearCompleted" text="Clear completed"/>
+    </HBox>
+    <HBox fx:id="info" alignment="CENTER" spacing="10.0">
+        <padding>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
+        </padding>
+        <Label style="-fx-text-fill: darkgrey;" text="Double-click to edit a todo"/>
+    </HBox>
+</VBox>

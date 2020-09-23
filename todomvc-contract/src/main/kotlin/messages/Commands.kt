@@ -1,9 +1,18 @@
+/*
+ * TodoMVC
+ * Copyright (c) 2020 Falko Schumann <falko.schumann@muspellheim.de>
+ */
+
 package de.muspellheim.todomvc.contract.messages
 
-data class AddTodoCommand(val title: String)
+data class NewTodoCommand(val title: String)
 
-data class ChangeTodoCommand(val id: String, val title: String)
+object ToggleAllCommand
 
-data class CompleteTodoCommand(val id: String)
+data class ToggleCommand(val id: String)
 
-object ClearCompletedTodosCommand
+data class DestroyCommand(val id: String)
+
+data class EditCommand(val id: String, val title: String)
+
+object ClearCompletedCommand
