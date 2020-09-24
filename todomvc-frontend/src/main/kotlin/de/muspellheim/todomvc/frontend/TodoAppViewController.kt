@@ -56,11 +56,12 @@ class TodoAppViewController {
     fun display(result: AllQueryResult) {
         main.items.setAll(result.todos)
 
-        val noTodos = result.todos.isNotEmpty()
-        main.isVisible = noTodos
-        main.isManaged = noTodos
-        footer.isVisible = noTodos
-        footer.isManaged = noTodos
+        val hasTodos = result.todos.isNotEmpty()
+        toggleAll.isVisible = hasTodos
+        main.isVisible = hasTodos
+        main.isManaged = hasTodos
+        footer.isVisible = hasTodos
+        footer.isManaged = hasTodos
     }
 
     fun filterActive() {
