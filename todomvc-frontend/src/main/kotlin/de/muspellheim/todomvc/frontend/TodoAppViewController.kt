@@ -11,6 +11,8 @@ import javafx.scene.control.*
 import javafx.scene.layout.*
 
 class TodoAppViewController {
+    lateinit var todoapp: Pane
+
     lateinit var onNewTodoCommand: (command: NewTodoCommand) -> CommandStatus
     lateinit var onToggleAllCommand: (command: ToggleAllCommand) -> CommandStatus
     lateinit var onToggleCommand: (command: ToggleCommand) -> CommandStatus
@@ -53,6 +55,12 @@ class TodoAppViewController {
 
     fun display(result: AllQueryResult) {
         main.items.setAll(result.todos)
+
+        val noTodos = result.todos.isNotEmpty()
+        main.isVisible = noTodos
+        main.isManaged = noTodos
+        footer.isVisible = noTodos
+        footer.isManaged = noTodos
     }
 
     fun filterActive() {

@@ -1,9 +1,9 @@
 /*
  * TodoMVC
- * Copyright (c) 2020 Falko Schumann
+ * Copyright (c) 2020 Falko Schumann <falko.schumann@muspellheim.de>
  */
 
-package de.muspellheim.todomvc.portal
+package de.muspellheim.todomvc.frontend
 
 import de.jensd.fx.glyphs.fontawesome.*
 import de.muspellheim.todomvc.contract.data.*

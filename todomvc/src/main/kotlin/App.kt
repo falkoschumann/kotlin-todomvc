@@ -25,6 +25,9 @@ class App : Application() {
         primaryStage.scene = Scene(root)
 
         // Bind
+        /*
+        controller.display(AllQueryResult(listOf(), itemsLeft = 0))
+        */
         controller.display(AllQueryResult(
             todos = listOf(
                 Todo(id = "1", title = "Taste JavaScript", completed = true),
