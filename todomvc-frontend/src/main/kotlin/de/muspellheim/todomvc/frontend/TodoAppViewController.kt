@@ -13,15 +13,15 @@ import javafx.scene.layout.*
 class TodoAppViewController {
     lateinit var todoapp: Pane
 
-    lateinit var onNewTodoCommand: (command: NewTodoCommand) -> CommandStatus
-    lateinit var onToggleAllCommand: (command: ToggleAllCommand) -> CommandStatus
-    lateinit var onToggleCommand: (command: ToggleCommand) -> CommandStatus
-    lateinit var onDestroyCommand: (command: DestroyCommand) -> CommandStatus
-    lateinit var onEditCommand: (command: EditCommand) -> CommandStatus
-    lateinit var onClearCompletedCommand: (command: ClearCompletedCommand) -> CommandStatus
-    lateinit var onAllQuery: (query: AllQuery) -> AllQueryResult
-    lateinit var onActiveQuery: (query: ActiveQuery) -> ActiveQueryResult
-    lateinit var onCompletedQuery: (query: CompletedQuery) -> CompletedQueryResult
+    lateinit var onNewTodoCommand: (command: NewTodoCommand) -> Unit
+    lateinit var onToggleAllCommand: (command: ToggleAllCommand) -> Unit
+    lateinit var onToggleCommand: (command: ToggleCommand) -> Unit
+    lateinit var onDestroyCommand: (command: DestroyCommand) -> Unit
+    lateinit var onEditCommand: (command: EditCommand) -> Unit
+    lateinit var onClearCompletedCommand: (command: ClearCompletedCommand) -> Unit
+    lateinit var onAllQuery: (query: AllQuery) -> Unit
+    lateinit var onActiveQuery: (query: ActiveQuery) -> Unit
+    lateinit var onCompletedQuery: (query: CompletedQuery) -> Unit
 
     lateinit var header: Pane
     lateinit var toggleAll: CheckBox
@@ -46,7 +46,8 @@ class TodoAppViewController {
         if (newTodo.text.isBlank()) {
             return
         }
-        onNewTodoCommand(NewTodoCommand(newTodo.text))
+        onNewTodoCommand(NewTodoCommand(newTodo.text.trim()))
+        newTodo.text = ""
     }
 
     fun filterAll() {

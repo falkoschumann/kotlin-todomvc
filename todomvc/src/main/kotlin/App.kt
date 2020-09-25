@@ -25,6 +25,7 @@ class App : Application() {
         primaryStage.scene = Scene(root)
 
         // Bind
+        controller.onNewTodoCommand = { println(it) }
         controller.display(AllQueryResult(listOf(), itemsLeft = 0))
         /*
         controller.display(AllQueryResult(
