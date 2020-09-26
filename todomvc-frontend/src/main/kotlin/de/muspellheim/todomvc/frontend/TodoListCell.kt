@@ -5,11 +5,18 @@
 
 package de.muspellheim.todomvc.frontend
 
-import de.jensd.fx.glyphs.fontawesome.*
-import de.muspellheim.todomvc.contract.data.*
-import javafx.scene.control.*
-import javafx.scene.layout.*
-import javafx.util.*
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView
+import de.muspellheim.todomvc.contract.data.Todo
+import javafx.scene.control.Button
+import javafx.scene.control.CheckBox
+import javafx.scene.control.Label
+import javafx.scene.control.ListCell
+import javafx.scene.control.ListView
+import javafx.scene.control.TextField
+import javafx.scene.layout.HBox
+import javafx.scene.layout.Priority
+import javafx.util.Callback
 
 class TodoListCell : ListCell<Todo>() {
 

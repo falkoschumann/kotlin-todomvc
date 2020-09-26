@@ -5,12 +5,12 @@
 
 package de.muspellheim.todomvc.adpater
 
-import java.nio.file.Paths
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import java.nio.file.Paths
 
 class CsvTodosRepositoryTests {
 
@@ -26,13 +26,16 @@ class CsvTodosRepositoryTests {
             assertAll(
                 { assertEquals(2, all.size, "2 todos found") },
                 {
-                    assertAll("first todo",
+                    assertAll(
+                        "first todo",
                         { assertEquals(all[0].id, "1", "id") },
                         { assertEquals(all[0].text, "Foo", "text") },
                         { assertTrue(all[0].isActive, "is active") }
                     )
-                }, {
-                    assertAll("second todo",
+                },
+                {
+                    assertAll(
+                        "second todo",
                         { assertEquals(all[1].id, "2", "id") },
                         { assertEquals(all[1].text, "Bar", "text") },
                         { assertTrue(all[1].isCompleted, "is completed") }
@@ -48,7 +51,8 @@ class CsvTodosRepositoryTests {
             assertAll(
                 { assertEquals(1, active.size, "1 todo found") },
                 {
-                    assertAll("first todo",
+                    assertAll(
+                        "first todo",
                         { assertEquals(active[0].id, "1", "id") },
                         { assertEquals(active[0].text, "Foo", "text") },
                         { assertTrue(active[0].isActive, "is active") }
@@ -64,7 +68,8 @@ class CsvTodosRepositoryTests {
             assertAll(
                 { assertEquals(1, completed.size, "1 todos found") },
                 {
-                    assertAll("second todo",
+                    assertAll(
+                        "second todo",
                         { assertEquals(completed[0].id, "2", "id") },
                         { assertEquals(completed[0].text, "Bar", "text") },
                         { assertTrue(completed[0].isCompleted, "is completed") }

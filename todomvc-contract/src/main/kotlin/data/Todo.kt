@@ -5,7 +5,7 @@
 
 package de.muspellheim.todomvc.contract.data
 
-import java.util.*
+import java.util.UUID
 
 data class Todo(
     val title: String,

@@ -5,10 +5,26 @@
 
 package de.muspellheim.todomvc.frontend
 
-import de.muspellheim.todomvc.contract.data.*
-import de.muspellheim.todomvc.contract.messages.*
-import javafx.scene.control.*
-import javafx.scene.layout.*
+import de.muspellheim.todomvc.contract.data.Todo
+import de.muspellheim.todomvc.contract.messages.ActiveQuery
+import de.muspellheim.todomvc.contract.messages.ActiveQueryResult
+import de.muspellheim.todomvc.contract.messages.AllQuery
+import de.muspellheim.todomvc.contract.messages.AllQueryResult
+import de.muspellheim.todomvc.contract.messages.ClearCompletedCommand
+import de.muspellheim.todomvc.contract.messages.CompletedQuery
+import de.muspellheim.todomvc.contract.messages.CompletedQueryResult
+import de.muspellheim.todomvc.contract.messages.DestroyCommand
+import de.muspellheim.todomvc.contract.messages.EditCommand
+import de.muspellheim.todomvc.contract.messages.NewTodoCommand
+import de.muspellheim.todomvc.contract.messages.ToggleAllCommand
+import de.muspellheim.todomvc.contract.messages.ToggleCommand
+import javafx.scene.control.CheckBox
+import javafx.scene.control.Label
+import javafx.scene.control.ListView
+import javafx.scene.control.TextField
+import javafx.scene.control.ToggleButton
+import javafx.scene.control.ToggleGroup
+import javafx.scene.layout.Pane
 
 class TodoAppViewController {
     lateinit var todoapp: Pane
