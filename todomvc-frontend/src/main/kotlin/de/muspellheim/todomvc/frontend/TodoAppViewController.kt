@@ -39,7 +39,8 @@ class TodoAppViewController {
     lateinit var info: Pane
 
     fun toggleAll() {
-        onToggleAllCommand(ToggleAllCommand)
+        val checked = toggleAll.isSelected
+        onToggleAllCommand(ToggleAllCommand(checked))
     }
 
     fun newTodo() {
