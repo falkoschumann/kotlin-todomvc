@@ -6,6 +6,7 @@
 package de.muspellheim.todomvc.backend.adapter
 
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import de.muspellheim.todomvc.backend.TodoRepository
 import de.muspellheim.todomvc.contract.data.Todo
 import java.nio.file.Files
@@ -20,7 +21,9 @@ class TodoJsonRepository(private val file: Path) : TodoRepository {
     }
 
     override fun store(todoList: List<Todo>) {
-        val gson = Gson()
+        val gson = GsonBuilder()
+            .setPrettyPrinting()
+            .create()
         Files.newBufferedWriter(file).use { writer ->
             gson.toJson(todoList, writer)
         }

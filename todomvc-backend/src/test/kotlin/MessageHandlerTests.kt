@@ -1,17 +1,18 @@
+/*
+ * TodoMVC
+ * Copyright (c) 2020 Falko Schumann <falko.schumann@muspellheim.de>
+ */
+
 package de.muspellheim.todomvc.backend
 
 import de.muspellheim.todomvc.contract.data.Todo
-import de.muspellheim.todomvc.contract.messages.ActiveQuery
-import de.muspellheim.todomvc.contract.messages.ActiveQueryResult
-import de.muspellheim.todomvc.contract.messages.AllQuery
-import de.muspellheim.todomvc.contract.messages.AllQueryResult
 import de.muspellheim.todomvc.contract.messages.ClearCompletedCommand
-import de.muspellheim.todomvc.contract.messages.CompletedQuery
-import de.muspellheim.todomvc.contract.messages.CompletedQueryResult
 import de.muspellheim.todomvc.contract.messages.DestroyCommand
 import de.muspellheim.todomvc.contract.messages.EditCommand
 import de.muspellheim.todomvc.contract.messages.NewTodoCommand
 import de.muspellheim.todomvc.contract.messages.Success
+import de.muspellheim.todomvc.contract.messages.TodoListQuery
+import de.muspellheim.todomvc.contract.messages.TodoListQueryResult
 import de.muspellheim.todomvc.contract.messages.ToggleAllCommand
 import de.muspellheim.todomvc.contract.messages.ToggleCommand
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -19,11 +20,6 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-
-/*
- * TodoMVC
- * Copyright (c) 2020 Falko Schumann <falko.schumann@muspellheim.de>
- */
 
 class MessageHandlerTests {
     private lateinit var repository: TestingTodoRepository
@@ -132,54 +128,17 @@ class MessageHandlerTests {
     }
 
     @Test
-    fun `all query`() {
-        val query = AllQuery
+    fun `todo list query`() {
+        val query = TodoListQuery
 
         val result = messageHandler.handle(query)
 
         assertEquals(
-            AllQueryResult(
+            TodoListQueryResult(
                 todoList = listOf(
                     Todo(id = "119e6785-8ffc-42e0-8df6-dbc64881f2b7", title = "Taste JavaScript", completed = true),
                     Todo(id = "d2f7760d-8f03-4cb3-9176-06311cb89993", title = "Buy a unicorn", completed = false)
-                ),
-                todoCount = 1
-            ),
-            result,
-            "Query result"
-        )
-    }
-
-    @Test
-    fun `active query`() {
-        val query = ActiveQuery
-
-        val result = messageHandler.handle(query)
-
-        assertEquals(
-            ActiveQueryResult(
-                todoList = listOf(
-                    Todo(id = "d2f7760d-8f03-4cb3-9176-06311cb89993", title = "Buy a unicorn", completed = false)
-                ),
-                todoCount = 1
-            ),
-            result,
-            "Query result"
-        )
-    }
-
-    @Test
-    fun `completed query`() {
-        val query = CompletedQuery
-
-        val result = messageHandler.handle(query)
-
-        assertEquals(
-            CompletedQueryResult(
-                todoList = listOf(
-                    Todo(id = "119e6785-8ffc-42e0-8df6-dbc64881f2b7", title = "Taste JavaScript", completed = true)
-                ),
-                todoCount = 1
+                )
             ),
             result,
             "Query result"

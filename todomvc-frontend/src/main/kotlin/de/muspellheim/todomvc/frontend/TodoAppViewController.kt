@@ -6,16 +6,12 @@
 package de.muspellheim.todomvc.frontend
 
 import de.muspellheim.todomvc.contract.data.Todo
-import de.muspellheim.todomvc.contract.messages.ActiveQuery
-import de.muspellheim.todomvc.contract.messages.ActiveQueryResult
-import de.muspellheim.todomvc.contract.messages.AllQuery
-import de.muspellheim.todomvc.contract.messages.AllQueryResult
 import de.muspellheim.todomvc.contract.messages.ClearCompletedCommand
-import de.muspellheim.todomvc.contract.messages.CompletedQuery
-import de.muspellheim.todomvc.contract.messages.CompletedQueryResult
 import de.muspellheim.todomvc.contract.messages.DestroyCommand
 import de.muspellheim.todomvc.contract.messages.EditCommand
 import de.muspellheim.todomvc.contract.messages.NewTodoCommand
+import de.muspellheim.todomvc.contract.messages.TodoListQuery
+import de.muspellheim.todomvc.contract.messages.TodoListQueryResult
 import de.muspellheim.todomvc.contract.messages.ToggleAllCommand
 import de.muspellheim.todomvc.contract.messages.ToggleCommand
 import javafx.scene.control.CheckBox
@@ -35,9 +31,7 @@ class TodoAppViewController {
     lateinit var onDestroyCommand: (command: DestroyCommand) -> Unit
     lateinit var onEditCommand: (command: EditCommand) -> Unit
     lateinit var onClearCompletedCommand: (command: ClearCompletedCommand) -> Unit
-    lateinit var onAllQuery: (query: AllQuery) -> Unit
-    lateinit var onActiveQuery: (query: ActiveQuery) -> Unit
-    lateinit var onCompletedQuery: (query: CompletedQuery) -> Unit
+    lateinit var onTodoListQuery: (query: TodoListQuery) -> Unit
 
     lateinit var header: Pane
     lateinit var toggleAll: CheckBox
@@ -54,6 +48,17 @@ class TodoAppViewController {
 
     lateinit var info: Pane
 
+    fun display(result: TodoListQueryResult) {
+        main.items.setAll(result.todoList)
+
+        val hasTodos = result.todoList.isNotEmpty()
+        toggleAll.isVisible = hasTodos
+        main.isVisible = hasTodos
+        main.isManaged = hasTodos
+        footer.isVisible = hasTodos
+        footer.isManaged = hasTodos
+    }
+
     fun toggleAll() {
         val checked = toggleAll.isSelected
         onToggleAllCommand(ToggleAllCommand(checked))
@@ -68,34 +73,15 @@ class TodoAppViewController {
     }
 
     fun filterAll() {
-        onAllQuery(AllQuery)
-    }
-
-    fun display(result: AllQueryResult) {
-        main.items.setAll(result.todoList)
-
-        val hasTodos = result.todoList.isNotEmpty()
-        toggleAll.isVisible = hasTodos
-        main.isVisible = hasTodos
-        main.isManaged = hasTodos
-        footer.isVisible = hasTodos
-        footer.isManaged = hasTodos
+        onTodoListQuery(TodoListQuery)
     }
 
     fun filterActive() {
-        onActiveQuery(ActiveQuery)
-    }
-
-    fun display(result: ActiveQueryResult) {
-        main.items.setAll(result.todoList)
+        onTodoListQuery(TodoListQuery)
     }
 
     fun filterCompleted() {
-        onCompletedQuery(CompletedQuery)
-    }
-
-    fun display(result: CompletedQueryResult) {
-        main.items.setAll(result.todoList)
+        onTodoListQuery(TodoListQuery)
     }
 
     fun clearCompleted() {
