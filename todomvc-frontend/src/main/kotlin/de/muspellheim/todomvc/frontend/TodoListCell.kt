@@ -58,20 +58,30 @@ class TodoListCell : ListCell<TodoModel>() {
             title.text = item.todo.title
             title.onMouseClicked = EventHandler {
                 if (it.button == MouseButton.PRIMARY && it.clickCount == 2) {
+                    completed.isVisible = false
                     container.children[1] = edit
+                    edit.requestFocus()
                     destroy.isVisible = false
                 }
             }
 
             edit.text = item.todo.title
-            edit.onAction = EventHandler {
-                item.onEditCommand(EditCommand(item.todo.id, edit.text))
-                container.children[1] = title
-                destroy.isVisible = container.isHover
+            edit.onAction = EventHandler { edit() }
+            edit.focusedProperty().addListener { _, oldValue, newValue ->
+                if (oldValue && !newValue) {
+                    edit()
+                }
             }
 
             destroy.onAction = EventHandler { item.onDestroyCommand(DestroyCommand(item.todo.id)) }
         }
+    }
+
+    private fun edit() {
+        item.onEditCommand(EditCommand(item.todo.id, edit.text.trim()))
+        completed.isVisible = true
+        container.children[1] = title
+        destroy.isVisible = container.isHover
     }
 }
 
