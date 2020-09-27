@@ -11,6 +11,6 @@ plugins {
 dependencies {
     api(project(":todomvc-contract"))
     implementation(kotlin("stdlib-jdk8"))
-    implementation("org.apache.commons:commons-csv:1.8")
+    implementation("com.google.code.gson:gson:2.8.6")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
