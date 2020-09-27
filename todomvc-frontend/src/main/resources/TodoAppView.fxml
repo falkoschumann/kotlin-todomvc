@@ -10,7 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import de.muspellheim.todomvc.frontend.*?>
 
-<VBox fx:id="todoapp" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.todomvc.frontend.TodoAppViewController" prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<VBox fx:id="todoapp" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.muspellheim.todomvc.frontend.TodoAppViewController" stylesheets="style.css" prefHeight="400.0" prefWidth="600.0">
     <VBox fx:id="header" alignment="CENTER">
         <Label style="-fx-text-fill: darksalmon;-fx-font-size: 42" text="todos"/>
         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -28,7 +30,10 @@
         <padding>
             <Insets bottom="7.0" left="7.0" right="7.0" top="7.0"/>
         </padding>
-        <Label fx:id="todoCount" text="... items left"/>
+        <TextFlow fx:id="todoCount">
+            <Text text="0" style="-fx-font-weight: bold" />
+            <Text text="items left"/>
+        </TextFlow>
         <Pane HBox.hgrow="ALWAYS"/>
         <ToggleButton fx:id="all" onAction="#filterAll" selected="true" text="All">
             <toggleGroup>
