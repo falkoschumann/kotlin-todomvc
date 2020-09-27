@@ -7,7 +7,7 @@ package de.muspellheim.todomvc.contract.messages
 
 data class NewTodoCommand(val title: String)
 
-data class ToggleAllCommand(val checked: Boolean)
+data class ToggleAllCommand(val completed: Boolean)
 
 data class ToggleCommand(val id: String)
 

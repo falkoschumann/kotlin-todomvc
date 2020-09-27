@@ -30,11 +30,11 @@ class App : Application() {
         // controller.display(AllQueryResult(listOf(), itemsLeft = 0))
         controller.display(
             AllQueryResult(
-                todos = listOf(
+                todoList = listOf(
                     Todo(id = "1", title = "Taste JavaScript", completed = true),
                     Todo(id = "2", title = "Buy a unicorn", completed = false)
                 ),
-                itemsLeft = 1
+                todoCount = 1
             )
         )
 

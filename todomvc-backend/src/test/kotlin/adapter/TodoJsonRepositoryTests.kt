@@ -3,9 +3,8 @@
  * Copyright (c) 2020 Falko Schumann
  */
 
-package de.muspellheim.todomvc.adpater
+package de.muspellheim.todomvc.backend.adapter
 
-import de.muspellheim.todomvc.backend.adapter.TodoJsonRepository
 import de.muspellheim.todomvc.contract.data.Todo
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -20,21 +19,21 @@ class TodoJsonRepositoryTests {
     fun `load todos`() {
         val repository = TodoJsonRepository(readTestFile)
 
-        val todos = repository.load()
+        val todoList = repository.load()
 
-        assertEquals(createTestData(), todos)
+        assertEquals(createTestData(), todoList)
     }
 
     @Test
     fun `store todos`() {
         Files.createDirectories(writtenTestFile.parent)
         val repository = TodoJsonRepository(writtenTestFile)
-        val todos = createTestData()
+        val todoList = createTestData()
 
-        repository.store(todos)
+        repository.store(todoList)
 
-        val actualTodos = repository.load()
-        assertEquals(createTestData(), actualTodos)
+        val actualTodoList = repository.load()
+        assertEquals(createTestData(), actualTodoList)
     }
 
     private fun createTestData() = listOf(

@@ -72,9 +72,9 @@ class TodoAppViewController {
     }
 
     fun display(result: AllQueryResult) {
-        main.items.setAll(result.todos)
+        main.items.setAll(result.todoList)
 
-        val hasTodos = result.todos.isNotEmpty()
+        val hasTodos = result.todoList.isNotEmpty()
         toggleAll.isVisible = hasTodos
         main.isVisible = hasTodos
         main.isManaged = hasTodos
@@ -87,7 +87,7 @@ class TodoAppViewController {
     }
 
     fun display(result: ActiveQueryResult) {
-        main.items.setAll(result.todos)
+        main.items.setAll(result.todoList)
     }
 
     fun filterCompleted() {
@@ -95,7 +95,7 @@ class TodoAppViewController {
     }
 
     fun display(result: CompletedQueryResult) {
-        main.items.setAll(result.todos)
+        main.items.setAll(result.todoList)
     }
 
     fun clearCompleted() {

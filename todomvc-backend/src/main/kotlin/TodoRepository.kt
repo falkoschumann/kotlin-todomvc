@@ -1,4 +1,4 @@
-package de.muspellheim.todomvc.contract
+package de.muspellheim.todomvc.backend
 
 import de.muspellheim.todomvc.contract.data.Todo
 
@@ -9,5 +9,5 @@ import de.muspellheim.todomvc.contract.data.Todo
 
 interface TodoRepository {
     fun load(): List<Todo>
-    fun store(todos: List<Todo>)
+    fun store(todoList: List<Todo>)
 }
