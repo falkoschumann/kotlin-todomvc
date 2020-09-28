@@ -14,6 +14,10 @@ import java.nio.file.Path
 
 class TodoJsonRepository(private val file: Path) : TodoRepository {
     override fun load(): List<Todo> {
+        if (!Files.exists(file)) {
+            return listOf()
+        }
+
         val gson = Gson()
         Files.newBufferedReader(file).use { reader ->
             return gson.fromJson(reader, Array<Todo>::class.java).toList()
