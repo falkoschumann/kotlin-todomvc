@@ -31,6 +31,7 @@ tasks.register<Jar>("uberJar") {
         attributes(
             "Implementation-Title" to "Todo MVC",
             "Implementation-Version" to archiveVersion,
+            "Implementation-Vendor" to "Falko Schumann <falko.schumann@muspellheim.de>",
             "Main-Class" to ext["mainClassName"]
         )
     }
